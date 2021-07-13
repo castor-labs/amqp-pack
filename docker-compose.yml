@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+
+  rabbitmq:
+    container_name: castor.amqp-pack-rabbit
+    image: rabbitmq:3.8-alpine
+    ports:
+      - 5672:5672

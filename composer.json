@@ -1,0 +1,40 @@
+{
+    "name": "castor/amqp-pack",
+    "description": "Integration of the AMQP protocol with some Castor libraries",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "keywords": ["php", "queue", "amqp", "rabbitmq", "producer", "consumer", "factory", "php7", "php8"],
+    "authors": [
+        {
+            "name": "Matias Navarro Carter",
+            "email": "mnavarrocarter@gmail.com"
+        }
+    ],
+    "config": {
+        "platform": {
+            "php": "7.4.2"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "castor/queue": "^0.3.0",
+        "php-amqplib/php-amqplib": "^3.0",
+        "castor/uri": "^0.2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Castor\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Castor\\": "tests"
+        }
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "phpunit/phpunit": "^9.5",
+        "vimeo/psalm": "^4.6"
+    }
+}

@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Castor\Queue;
 
+use Castor\Amqp\ConnectionManager;
 use Castor\Net\InvalidUri;
 use Castor\Net\Uri;
 use Generator;
@@ -34,7 +35,7 @@ class AmqpDriverTest extends TestCase
      */
     public function testItPublishes5000Messages(): void
     {
-        $factory = new AmqpFactory();
+        $factory = new AmqpFactory(new ConnectionManager());
         $driver = $factory->create(Uri::parse('amqp://localhost'));
         $count = 0;
         foreach ($this->randomMessages() as $message) {
@@ -51,7 +52,7 @@ class AmqpDriverTest extends TestCase
      */
     public function testItConsumes5000Messages(): void
     {
-        $factory = new AmqpFactory();
+        $factory = new AmqpFactory(new ConnectionManager());
         $driver = $factory->create(Uri::parse('amqp://localhost'));
         $cancelWrapper = static function (callable $cancel): callable {
             return static function (int $count) use ($cancel) {

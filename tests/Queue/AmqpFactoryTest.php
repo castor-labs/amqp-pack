@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Castor\Queue;
 
+use Castor\Amqp\ConnectionManager;
 use Castor\Net\InvalidUri;
 use Castor\Net\Uri;
 use PhpAmqpLib\Connection\AMQPLazyConnection;
@@ -38,7 +39,7 @@ final class AmqpFactoryTest extends TestCase
      */
     public function testItCreatesLazySocketConnection(): void
     {
-        $factory = new AmqpFactory();
+        $factory = new AmqpFactory(new ConnectionManager());
         $driver = $factory->create(Uri::parse('amqp://localhost?lazy=true'));
         self::assertInstanceOf(AMQPLazySocketConnection::class, $driver->getConnection());
     }
@@ -48,7 +49,7 @@ final class AmqpFactoryTest extends TestCase
      */
     public function testItCreatesSocketConnection(): void
     {
-        $factory = new AmqpFactory();
+        $factory = new AmqpFactory(new ConnectionManager());
         $driver = $factory->create(Uri::parse('amqp://localhost'));
         self::assertInstanceOf(AMQPSocketConnection::class, $driver->getConnection());
     }
@@ -58,7 +59,7 @@ final class AmqpFactoryTest extends TestCase
      */
     public function testItCreatesLazyStreamConnection(): void
     {
-        $factory = new AmqpFactory();
+        $factory = new AmqpFactory(new ConnectionManager());
         $driver = $factory->create(Uri::parse('amqp+stream://localhost?lazy=true'));
         self::assertInstanceOf(AMQPLazyConnection::class, $driver->getConnection());
     }
@@ -68,7 +69,7 @@ final class AmqpFactoryTest extends TestCase
      */
     public function testItCreatesStreamConnection(): void
     {
-        $factory = new AmqpFactory();
+        $factory = new AmqpFactory(new ConnectionManager());
         $driver = $factory->create(Uri::parse('amqp+stream://localhost'));
         self::assertInstanceOf(AMQPStreamConnection::class, $driver->getConnection());
     }
